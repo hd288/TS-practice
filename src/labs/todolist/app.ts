@@ -144,7 +144,6 @@ function editTask(taskId: number) {
   saveTaskButton.addEventListener("click", saveTaskClickHandler);
 }
 
-
 // Delete task
 function deleteTask(taskId: number) {
   const newTaskList = tasks.filter((t) => t.id !== taskId);
@@ -208,14 +207,45 @@ function renderFilteredTasks(filteredTasks: Task[]) {
   filteredTasks.forEach((task) => {
     const li = document.createElement("li");
     li.classList.add("list-group-item");
+
+    // Add the "completed" class to the <span> if the task is completed
+    const spanClass = task.completed ? "completed" : "";
+
     li.innerHTML = `
-        <input type="checkbox" class="form-check-input" data-task-id="${
+        <div class="container d-flex flex-row align-items-center">
+        <input type="checkbox" class="form-check-input check-box" data-task-id="${
           task.id
         }" ${task.completed ? "checked" : ""}>
-        <span class="span-text">${task.text}</span>
+        <span class="${spanClass} span-text w-50">${task.text}</span>
+        <div class="container d-flex flex-row justify-content-end align-items-center">
+        <button id="editTaskButton" data-task-id="${
+          task.id
+        }" type="button" class="btn btn-warning">
+          Edit Task
+        </button>
+        <button id="deleteTaskButton" data-task-id="${
+          task.id
+        }" type="button" class="btn btn-danger">
+          Delete Task
+        </button>
+        </div>
+        </div>
       `;
+
     const checkbox = li.querySelector("input") as HTMLInputElement;
     checkbox.addEventListener("change", () => toggleTaskCompletion(task.id));
+
+    // Find the "Delete Task" and "Edit Task" buttons within the current li element
+    const deleteTaskButton = li.querySelector(
+      "#deleteTaskButton"
+    ) as HTMLButtonElement;
+    const editTaskButton = li.querySelector(
+      "#editTaskButton"
+    ) as HTMLButtonElement;
+
+    // Add event listeners for button clicks
+    deleteTaskButton.addEventListener("click", () => deleteTask(task.id));
+    editTaskButton.addEventListener("click", () => editTask(task.id));
     taskList.appendChild(li);
   });
 }
