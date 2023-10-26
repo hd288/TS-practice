@@ -1,0 +1,23 @@
+type Task = {
+    id: number;
+    text: string;
+    completed: boolean;
+};
+declare const tasks: Task[];
+declare const taskInput: HTMLInputElement;
+declare const addTaskButton: HTMLButtonElement;
+declare const saveTaskButton: HTMLButtonElement;
+declare const deleteTaskButton: HTMLButtonElement;
+declare const editTaskButton: HTMLButtonElement;
+declare const taskList: HTMLUListElement;
+declare const clearCompletedButton: HTMLButtonElement;
+declare const filterButtons: NodeListOf<Element>;
+declare function addTask(): void;
+declare function renderTasks(): void;
+declare function editTask(taskId: number): void;
+declare function deleteTask(taskId: number): void;
+declare function toggleTaskCompletion(taskId: number): void;
+declare function updateItemCount(): void;
+declare function clearCompletedTasks(): void;
+declare function filterTasks(filter: string): void;
+declare function renderFilteredTasks(filteredTasks: Task[]): void;

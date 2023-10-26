@@ -18,7 +18,9 @@
       .span-text {
         padding-left: 20px;
       }
-      
+      .check-box {
+        min-width: 20px;
+      }
     </style>
 
     <title>To-Do List</title>
@@ -40,10 +42,11 @@
         <button id="addTaskButton" type="button" class="btn btn-primary">
           Add Task
         </button>
+        <button id="saveTaskButton" type="button" style="display: none;" class="btn btn-success">
+          Save Task
+        </button>
       </div>
-      <ul id="taskList" class="list-group">
-       
-      </ul>
+      <ul id="taskList" class="list-group"></ul>
 
       <div
         class="btn-group w-100 pt-5 d-flex justify-content-between"
